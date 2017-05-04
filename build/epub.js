@@ -5806,7 +5806,7 @@ EPUBJS.Layout.Reflowable.prototype.format = function(documentElement, _width, _h
 	//-- Check the width and create even width columns
 	var width = Math.floor(_width);
 	// var width = (fullWidth % 2 === 0) ? fullWidth : fullWidth - 0; // Not needed for single
-	var section = Math.floor(width / 8);
+	var section = Math.floor(width / 20);
 	var gap = (_gap >= 0) ? _gap : ((section % 2 === 0) ? section : section - 1);
 	this.documentElement = documentElement;
 	//-- Single Page
@@ -5865,7 +5865,7 @@ EPUBJS.Layout.ReflowableSpreads.prototype.format = function(documentElement, _wi
 	var fullWidth = Math.floor(_width);
 	var width = (fullWidth % 2 === 0) ? fullWidth : fullWidth - 1;
 
-	var section = Math.floor(width / 8);
+	var section = Math.floor(width / 20);
 	var gap = (_gap >= 0) ? _gap : ((section % 2 === 0) ? section : section - 1);
 
 	//-- Double Page
