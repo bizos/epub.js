@@ -100,11 +100,11 @@ body {
 }
 
 #viewer {
-  width: 80%;
-  height: 80%;
+  width: 95%;
+  height: 90%;
   /* margin-left: 10%; */
   margin: 0 auto;
-  max-width: 1250px;
+  /*max-width: 1250px;  */
   z-index: 2;
   position: relative;
   overflow: hidden;
@@ -115,11 +115,11 @@ body {
 }
 
 #prev {
-  left: 40px;
+  left: 0px;
 }
 
 #next {
-  right: 40px;
+  right: 0px;
 }
 
 .arrow {
