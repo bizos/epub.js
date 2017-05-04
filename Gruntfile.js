@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 				"browser": true,
 				"devel": true,
 				"worker": true,
-
+				"reporterOutput": "",
 				// Enforcing
 				//"maxlen": 80,
 				//"quotmark": "single",
@@ -108,5 +108,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).
-	grunt.registerTask('default', ['jshint', 'concat_sourcemap', 'uglify', 'copy']);
+	grunt.registerTask('default', [ 'concat_sourcemap', 'uglify', 'copy']);  //'jshint',
 };
