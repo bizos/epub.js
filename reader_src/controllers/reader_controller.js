@@ -37,7 +37,7 @@ EPUBJS.reader.ReaderController = function(book) {
 
 	var hideLoader = function() {
 		$loader.hide();
-		
+
 		//-- If the book is using spreads, show the divider
 		// if(book.settings.spreads) {
 		// 	showDivider();
@@ -54,9 +54,9 @@ EPUBJS.reader.ReaderController = function(book) {
 
 	var keylock = false;
 
-	var arrowKeys = function(e) {		
-		if(e.keyCode == 37) { 
-			
+	var arrowKeys = function(e) {
+		if(e.keyCode == 37) {
+
 			if(book.metadata.direction === "rtl") {
 				book.nextPage();
 			} else {
@@ -80,7 +80,7 @@ EPUBJS.reader.ReaderController = function(book) {
 			} else {
 				book.nextPage();
 			}
-			
+
 			$next.addClass("active");
 
 			keylock = true;
@@ -95,8 +95,17 @@ EPUBJS.reader.ReaderController = function(book) {
 
 	document.addEventListener('keydown', arrowKeys, false);
 
+	var mousewheel = function(e){
+		if (e.wheelDelta > 0 ){
+			book.prevPage();
+		} else {
+			book.nextPage();
+		}
+	}
+	document.addEventListener('mousewheel', mousewheel, false);
+
 	$next.on("click", function(e){
-		
+
 		if(book.metadata.direction === "rtl") {
 			book.prevPage();
 		} else {
@@ -107,7 +116,7 @@ EPUBJS.reader.ReaderController = function(book) {
 	});
 
 	$prev.on("click", function(e){
-		
+
 		if(book.metadata.direction === "rtl") {
 			book.nextPage();
 		} else {
@@ -116,7 +125,7 @@ EPUBJS.reader.ReaderController = function(book) {
 
 		e.preventDefault();
 	});
-	
+
 	book.on("renderer:spreads", function(bool){
 		if(bool) {
 			showDivider();
@@ -128,9 +137,9 @@ EPUBJS.reader.ReaderController = function(book) {
 	// book.on("book:atStart", function(){
 	// 	$prev.addClass("disabled");
 	// });
-	// 
+	//
 	// book.on("book:atEnd", function(){
-	// 	$next.addClass("disabled");	
+	// 	$next.addClass("disabled");
 	// });
 
 	return {
@@ -140,6 +149,7 @@ EPUBJS.reader.ReaderController = function(book) {
 		"hideLoader" : hideLoader,
 		"showDivider" : showDivider,
 		"hideDivider" : hideDivider,
-		"arrowKeys" : arrowKeys
+		"arrowKeys" : arrowKeys,
+		"mousewheel": mousewheel
 	};
 };
