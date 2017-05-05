@@ -7065,7 +7065,7 @@ RSVP.EventTarget.mixin(EPUBJS.Render.Iframe.prototype);
 
 EPUBJS.Renderer = function(renderMethod, hidden) {
 	// Dom events to listen for
-	this.listenedEvents = ["keydown", "keyup", "keypressed", "mouseup", "mousedown", "click"];
+	this.listenedEvents = ["keydown", "keyup", "keypressed", "mouseup", "mousedown", "click", "mousewheel"];  //zy add mousewheel 20170504
 	this.upEvent = "mouseup";
 	this.downEvent = "mousedown";
 	if('ontouchstart' in document.documentElement) {
@@ -7465,8 +7465,8 @@ EPUBJS.Renderer.prototype.remove = function() {
 		this.removeEventListeners();
 		this.removeSelectionListeners();
 	}
-	
-	// clean container content 
+
+	// clean container content
 	//this.container.innerHtml = ""; // not safe
 	this.container.removeChild(this.element);
 };
@@ -8243,7 +8243,7 @@ EPUBJS.Renderer.prototype.resize = function(width, height, setSize){
 
 EPUBJS.Renderer.prototype.onResized = function(e) {
 	this.trigger('renderer:beforeResize');
-	
+
 	var width = this.container.clientWidth;
 	var height = this.container.clientHeight;
 

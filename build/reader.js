@@ -119,7 +119,7 @@ EPUBJS.Reader = function(bookPath, _options) {
 
 	book.on("renderer:keydown", this.adjustFontSize.bind(this));
 	book.on("renderer:keydown", reader.ReaderController.arrowKeys.bind(this));
-
+	book.on("renderer:mousewheel", reader.ReaderController.mousewheel.bind(this));  //zy add 20170504
 	book.on("renderer:selected", this.selectedRange.bind(this));
 
 	return this;
@@ -316,6 +316,7 @@ EPUBJS.Reader.prototype.selectedRange = function(range){
 
 //-- Enable binding events to reader
 RSVP.EventTarget.mixin(EPUBJS.Reader.prototype);
+
 EPUBJS.reader.BookmarksController = function() {
 	var reader = this;
 	var book = this.book;
@@ -838,7 +839,7 @@ EPUBJS.reader.ReaderController = function(book) {
 
 	var hideLoader = function() {
 		$loader.hide();
-		
+
 		//-- If the book is using spreads, show the divider
 		// if(book.settings.spreads) {
 		// 	showDivider();
@@ -855,9 +856,9 @@ EPUBJS.reader.ReaderController = function(book) {
 
 	var keylock = false;
 
-	var arrowKeys = function(e) {		
-		if(e.keyCode == 37) { 
-			
+	var arrowKeys = function(e) {
+		if(e.keyCode == 37) {
+
 			if(book.metadata.direction === "rtl") {
 				book.nextPage();
 			} else {
@@ -881,7 +882,7 @@ EPUBJS.reader.ReaderController = function(book) {
 			} else {
 				book.nextPage();
 			}
-			
+
 			$next.addClass("active");
 
 			keylock = true;
@@ -896,8 +897,18 @@ EPUBJS.reader.ReaderController = function(book) {
 
 	document.addEventListener('keydown', arrowKeys, false);
 
+	var mousewheel = function(e){  //zy add 20170504
+		if (e.wheelDelta > 0 ){
+			book.prevPage();
+		} else {
+			book.nextPage();
+		}
+	}
+	document.addEventListener('mousewheel', mousewheel, false);  //zy add 20170504
+	//this.Iframe.contentDocument.addEventListener('mousewheel', mousewheel, false);  //zy add 20170504
+
 	$next.on("click", function(e){
-		
+
 		if(book.metadata.direction === "rtl") {
 			book.prevPage();
 		} else {
@@ -908,7 +919,7 @@ EPUBJS.reader.ReaderController = function(book) {
 	});
 
 	$prev.on("click", function(e){
-		
+
 		if(book.metadata.direction === "rtl") {
 			book.nextPage();
 		} else {
@@ -917,7 +928,7 @@ EPUBJS.reader.ReaderController = function(book) {
 
 		e.preventDefault();
 	});
-	
+
 	book.on("renderer:spreads", function(bool){
 		if(bool) {
 			showDivider();
@@ -929,9 +940,9 @@ EPUBJS.reader.ReaderController = function(book) {
 	// book.on("book:atStart", function(){
 	// 	$prev.addClass("disabled");
 	// });
-	// 
+	//
 	// book.on("book:atEnd", function(){
-	// 	$next.addClass("disabled");	
+	// 	$next.addClass("disabled");
 	// });
 
 	return {
@@ -941,9 +952,11 @@ EPUBJS.reader.ReaderController = function(book) {
 		"hideLoader" : hideLoader,
 		"showDivider" : showDivider,
 		"hideDivider" : hideDivider,
-		"arrowKeys" : arrowKeys
+		"arrowKeys" : arrowKeys,
+		"mousewheel": mousewheel
 	};
 };
+
 EPUBJS.reader.SettingsController = function() {
 	var book = this.book;
 	var reader = this;

@@ -119,7 +119,7 @@ EPUBJS.Reader = function(bookPath, _options) {
 
 	book.on("renderer:keydown", this.adjustFontSize.bind(this));
 	book.on("renderer:keydown", reader.ReaderController.arrowKeys.bind(this));
-
+	book.on("renderer:mousewheel", reader.ReaderController.mousewheel.bind(this));  //zy add 20170504
 	book.on("renderer:selected", this.selectedRange.bind(this));
 
 	return this;
