@@ -95,14 +95,15 @@ EPUBJS.reader.ReaderController = function(book) {
 
 	document.addEventListener('keydown', arrowKeys, false);
 
-	var mousewheel = function(e){
+	var mousewheel = function(e){  //zy add 20170504
 		if (e.wheelDelta > 0 ){
 			book.prevPage();
 		} else {
 			book.nextPage();
 		}
 	}
-	document.addEventListener('mousewheel', mousewheel, false);
+	document.addEventListener('mousewheel', mousewheel, false);  //zy add 20170504
+	//this.Iframe.contentDocument.addEventListener('mousewheel', mousewheel, false);  //zy add 20170504
 
 	$next.on("click", function(e){
 

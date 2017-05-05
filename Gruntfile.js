@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 			reader: {
 				options: {
 						preserveComments: 'some',
-						sourceMap: false
+						sourceMap: true  //zy change 20170504
 				},
 				files: {
 					'reader/js/epub.min.js': ['<banner>', 'node_modules/rsvp/dist/rsvp.js', 'src/*.js',  'libs/mime-types/mime-types.js'],
