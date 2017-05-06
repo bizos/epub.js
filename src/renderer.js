@@ -55,6 +55,7 @@ EPUBJS.Renderer.prototype.Events = [
 	"renderer:mouseup",
 	"renderer:mousedown",
 	"renderer:click",
+	"renderer:mousewheel",  //zy add 20170506
 	"renderer:touchstart",
 	"renderer:touchend",
 	"renderer:selected",

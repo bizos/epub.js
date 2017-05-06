@@ -6811,6 +6811,15 @@ EPUBJS.Render.Iframe.prototype.load = function(contents, url){
 
 		render.window.addEventListener("resize", render.resized.bind(render), false);
 
+		var mousewheel = function(e){  //zy add 20170507
+			if (e.wheelDelta > 0 ){
+				book.prevPage();
+			} else {
+				book.nextPage();
+			}
+		}
+		render.document.addEventListener('mousewheel', mousewheel, false);  //zy add 20170507
+
 		// Reset the scroll position
 		render.leftPos = 0;
 		render.setLeft(0);
@@ -7120,6 +7129,7 @@ EPUBJS.Renderer.prototype.Events = [
 	"renderer:mouseup",
 	"renderer:mousedown",
 	"renderer:click",
+	"renderer:mousewheel",  //zy add 20170506
 	"renderer:touchstart",
 	"renderer:touchend",
 	"renderer:selected",
