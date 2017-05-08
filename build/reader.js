@@ -857,7 +857,7 @@ EPUBJS.reader.ReaderController = function(book) {
 	var keylock = false;
 
 	var arrowKeys = function(e) {
-		if(e.keyCode == 37) {
+		if(e.keyCode == 37)  {  //zy change 20170508
 
 			if(book.metadata.direction === "rtl") {
 				book.nextPage();
@@ -875,7 +875,7 @@ EPUBJS.reader.ReaderController = function(book) {
 
 			 e.preventDefault();
 		}
-		if(e.keyCode == 39) {
+		if((e.keyCode == 39) || (e.keyCode == 32)) {
 
 			if(book.metadata.direction === "rtl") {
 				book.prevPage();
